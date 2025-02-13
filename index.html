@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="dv" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ކިޔަމާ kiyamaa</title>
+    <meta name="description" content="ކުޑަކުދިންނަށް ޚާއްސަ ފޯނިވީ އެޕްލިކޭޝަން. ވާހަކަ، ހިސާބު، ލަފުޒު ކުއިޒް، ކުރެހުން، ވޯރކްޝީޓް، ކުލަޖައްސާފޮތް އަދި އެހެނިހެން ކަންތައްތައް އެކުލެވިގެންވޭ.">
+    <meta name="keywords" content="ކުޑަކުދިން، އުނގެނުން، ދިވެހި، ވާހަކަ، ހިސާބު، ލަފުޒު ކުއިޒް، ކުރެހުން، ވޯރކްޝީޓް، ކުލަޖައްސާފޮތް">
+    <meta name="author" content="Thaana">
+    <link rel="canonical" href="https://kiyamaa.org">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @font-face {
+            font-family: MV Typewriter;
+            src: url("https://dhivehi.mv/fonts/data/df/mvtyper.ttf");
+        }
+
+        /* New Color Palette */
+        :root {
+            --kid-primary: #e78d84;
+            --kid-secondary: #e2ae8d;
+            --kid-accent: #ece598;
+            --kid-blue: #b8f0af;
+            --kid-purple: #b3d2f7;
+            --kid-bg-light: #F8F8FF;
+            --kid-text-dark: #333333;
+            --kid-white: #FFFFFF;
+            --icon-color: var(--kid-blue);
+
+            /* Dark Mode Colors */
+            --dark-bg: #121212;
+            --dark-text: #F0F0F0;
+            --dark-header-bg: #202020;
+            --dark-card-bg: #252525;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--kid-bg-light);
+            color: var(--kid-text-dark);
+            padding-bottom: 70px;
+            overflow-x: hidden;
+            direction: rtl;
+            transition: background-color 0.3s, color 0.3s; /* Dark mode transition */
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 20px;
+            margin-bottom: 20px;
+            background-color: var(--kid-white); /* Light Header Background */
+            border-radius: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s; /* Dark mode transition */
+        }
+
+        .dark-mode .header {
+            background-color: var(--dark-header-bg);
+        }
+
+
+        .header-title-container {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 48px;
+            background: linear-gradient(to right, var(--kid-primary), var(--kid-secondary), var(--kid-blue), var(--kid-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            margin-bottom: 0;
+            font-family: 'MV Typewriter', sans-serif;
+            text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 22px;
+            color: var(--kid-primary);
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+        }
+
+
+        .header-search-icon, .dark-mode-toggle {
+            font-size: 24px;
+            color: var(--kid-text-dark);
+            cursor: pointer;
+            margin-left: 20px;
+            opacity: 0.7;
+            transition: opacity 0.2s ease, color 0.3s; /* Dark mode transition */
+        }
+
+        .dark-mode .header-search-icon, .dark-mode .dark-mode-toggle {
+            color: var(--dark-text);
+        }
+
+
+        .header-search-icon:hover, .dark-mode-toggle:hover {
+            opacity: 1;
+        }
+
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: var(--kid-white); /* Light Card Background */
+            border-radius: 20px;
+            padding: 30px;
+            text-align: right;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s; /* Dark mode transition */
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+            border: 3px solid transparent;
+        }
+
+        .dark-mode .card {
+            background-color: var(--dark-card-bg);
+        }
+
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+            border-color: var(--kid-accent);
+        }
+
+        .card-icon {
+            font-size: 55px;
+            margin-bottom: 20px;
+            float: left;
+            color: var(--icon-color);
+        }
+
+        .card-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--kid-text-dark);
+            font-family: 'MV Typewriter', sans-serif;
+            transition: color 0.3s; /* Dark mode transition */
+        }
+        .dark-mode .card-title {
+            color: var(--dark-text);
+        }
+
+
+        .card-description {
+            font-size: 17px;
+            color: var(--kid-text-dark);
+            line-height: 1.5;
+            transition: color 0.3s; /* Dark mode transition */
+        }
+         .dark-mode .card-description {
+            color: var(--dark-text);
+        }
+
+
+        .start-button {
+            background-color: var(--kid-blue);
+            color: #0c0c0c85;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .start-button:hover {
+            background-color: var(--kid-primary);
+            transform: scale(1.08);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        }
+
+        /* މޮޑަލް ސްޓައިލްސް */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--kid-white);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+            position: relative;
+            transition: background-color 0.3s; /* Dark mode transition */
+        }
+        .dark-mode .modal-content {
+            background-color: var(--dark-card-bg);
+        }
+
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 30px;
+            color: var(--kid-text-dark);
+            cursor: pointer;
+            background: none;
+            border: none;
+            opacity: 0.7;
+            transition: opacity 0.2s ease, color 0.3s; /* Dark mode transition */
+        }
+         .dark-mode .modal-close {
+            color: var(--dark-text);
+        }
+
+
+        .modal-close:hover {
+            opacity: 1;
+        }
+
+        /* ސްޓޯރީއަށް ޚާއްސަ ސްޓައިލްސް */
+        .story-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .story-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Image shadow */
+        }
+
+        .story-text {
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-family: 'MV Typewriter', sans-serif;
+        }
+
+        .story-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .navigation-button {
+            background-color: var(--kid-blue);
+            color: var(--kid-white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-size: 17px;
+        }
+
+        .navigation-button:hover {
+            background-color: var(--kid-primary);
+        }
+
+        /* ލަފުޒުގެ ކުއިޒް */
+        .word-puzzle-container {
+            margin-bottom: 25px;
+        }
+
+        .letter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .letter-button {
+            background-color: var(--kid-secondary);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-family: 'MV Typewriter', sans-serif;
+            color: var(--kid-text-dark);
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+
+        .letter-button:hover {
+            background-color: var(--kid-accent);
+            color: var(--kid-white);
+        }
+
+        #wordPuzzleAnswer {
+            font-family: 'MV Typewriter', sans-serif;
+            font-size: 20px;
+            padding: 8px;
+            border-radius: 8px;
+            border: 2px solid var(--kid-blue);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* ވޯރކްޝީޓްސް */
+        .worksheet-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .worksheet-item {
+            margin-bottom: 20px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .worksheet-image-thumb {
+            width: 50px;
+            height: auto;
+            margin-left: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+
+        .download-link {
+            color: var(--kid-blue);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .download-link:hover {
+            text-decoration: underline;
+            color: var(--kid-primary);
+        }
+
+        /* ކަލަރިން ބުކް */
+        .coloring-book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .coloring-book-image {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        .coloring-book-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* އާޓް ގޭމް ސްޓައިލްސް */
+        .art-game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .art-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .color-button, .tool-button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--kid-text-dark);
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .color-button:hover, .tool-button:hover,
+        .color-button.active, .tool-button.active {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .color-button.black { background-color: black; border-color: black;}
+        .color-button.red { background-color: red; border-color: red;}
+        .color-button.blue { background-color: blue; border-color: blue;}
+        .color-button.green { background-color: green; border-color: green;}
+        .color-button.yellow { background-color: yellow; border-color: yellow;}
+        .tool-button.eraser {
+            background-color: var(--kid-white);
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .art-game-container canvas {
+            border: 3px dashed var(--kid-accent);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* ބޮޓޮމް ނެވިގޭޝަން ބާރ */
+        .bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--kid-white);
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            z-index: 999;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            transition: background-color 0.3s; /* Dark mode transition */
+        }
+        .dark-mode .bottom-navbar {
+            background-color: var(--dark-header-bg); /* Use header bg for navbar in dark mode */
+        }
+
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--kid-text-dark);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s ease, transform 0.2s ease, color 0.3s; /* Dark mode transition */
+        }
+        .dark-mode .nav-item {
+            color: var(--dark-text);
+        }
+
+
+        .nav-item:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .nav-text {
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        /* ޔޫޓިއުބް ވީޑިއޯ ސްޓައިލްސް */
+        .youtube-video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .youtube-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* މީޑިއާ ކުއަރީސް */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 40px;
+            }
+
+            .subtitle {
+                font-size: 20px;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .card-icon {
+                font-size: 40px;
+            }
+            .card-title {
+                font-size: 26px;
+            }
+            .card-description {
+                font-size: 15px;
+            }
+            .modal-content {
+                padding: 25px;
+            }
+             .header {
+                padding: 15px 10px;
+            }
+
+            .header-search-icon {
+                margin-left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-title-container">
+            <h1 class="title">ކިޔަމާ</h1>
+            <p class="subtitle">ރީތި ވާހަކަތަކާއި މަޖާ ގޭމްތައް</p>
+        </div>
+        <div class="header-icons">
+            <i class="fas fa-search header-search-icon" onclick="alert('Search functionality is not implemented yet!');"></i>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="grid-container">
+        <!-- ސްޓޯރީސް ކާޑް -->
+        <div class="card" onclick="openModal('stories')">
+            <div class="card-icon"><i class="fas fa-book-open"></i></div>
+            <h2 class="card-title">ވާހަކަ </h2>
+            <p class="card-description">ތަފާތު މަޖާ، ބިރުވެރި، އަދި އިބުރަތްތެރި ވާހަކަތައް.</p>
+            <button class="start-button">ކިޔަން ފަށާ</button>
+        </div>
+
+        <!-- ގޭމްސް ކާޑް -->
+        <div class="card" onclick="openModal('games')">
+            <div class="card-icon"><i class="fas fa-gamepad"></i></div>
+            <h2 class="card-title">ގޭމްސް</h2>
+            <p class="card-description">އެކުވެރިންނާއެކު ކުޅެން މަޖާ ގޭމްސް!</p>
+            <button class="start-button">ކުޅެން ފަށާ</button>
+        </div>
+
+        <!-- ވޯރކްޝީޓްސް -->
+        <div class="card" onclick="openModal('worksheets')">
+            <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+            <h2 class="card-title">ވޯރކްޝީޓްސް</h2>
+            <p class="card-description">މަޖާ އެކްސަސައިޒްތަކާއެކު ޕްރެކްޓިސް ކުރޭ!</p>
+            <button class="start-button">ދަސްކުރަން ފަށާ</button>
+        </div>
+
+        <!-- ކުލަ ޖައްސާ ފޮތް -->
+        <div class="card" onclick="openModal('coloringbook')">
+            <div class="card-icon"><i class="fas fa-paint-brush"></i></div>
+            <h2 class="card-title">ކުލަ ޖައްސާ ފޮތް</h2>
+            <p class="card-description">ތިބާގެ ކުލަޖެއްސުމުގެ ހުނަރު ދައްކާލާ!</p>
+            <button class="start-button">ކުލަ ޖައްސަން ފަށާ</button>
+        </div>
+
+         <!-- އާޓް ކާޑް -->
+        <div class="card" onclick="openModal('art')">
+            <div class="card-icon"><i class="fas fa-palette"></i></div>
+            <h2 class="card-title">ކުރުހަން ދަސްކުރަމާ </h2>
+            <p class="card-description">ކުރަހާ ކުލަޖައްސަން ދަސްކުރަމާ.</p>
+            <button class="start-button">ކުރަހަން ފަށާ</button>
+        </div>
+         <!-- އެބައުޓް ކާޑް -->
+        <div class="card" onclick="openModal('about')">
+            <div class="card-icon"><i class="fas fa-info-circle"></i></div>
+            <h2 class="card-title">އަޅުގަނޑުމެން</h2>
+            <p class="card-description">އެޕްލިކޭޝަން އާއި މެދު މައުލޫމާތު ހޯދާ!</p>
+            <button class="start-button"> ގުޅުއްވާ</button>
+        </div>
+
+
+    </div>
+
+    <!-- މޮޑަލް ސްޓްރަކްޗަރ -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <h2 id="modal-title"></h2>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- ބޮޓޮމް ނެވިގޭޝަން ބާރ -->
+    <footer class="bottom-navbar">
+        <a href="#" class="nav-item" onclick="openModal('home'); return false;">
+            <i class="fas fa-home nav-icon"></i>
+            <span class="nav-text">ހޯމް</span>
+        </a>
+        <a href="#" class="nav-item" onclick="openModal('stories'); return false;">
+            <i class="fas fa-book-open nav-icon"></i>
+            <span class="nav-text">ވާހަކަ</span>
+        </a>
+         <a href="#" class="nav-item" onclick="openModal('games'); return false;">
+            <i class="fas fa-gamepad nav-icon"></i>
+            <span class="nav-text">ގޭމްސް</span>
+        </a>
+       
+        <a href="#" class="nav-item" onclick="openModal('search'); return false;">
+            <i class="fas fa-search nav-icon"></i>
+            <span class="nav-text">ހޯދާ</span>
+        </a>
+        <a href="#" class="nav-item" onclick="openModal('about'); return false;">
+            <i class="fas fa-info-circle nav-icon"></i>
+            <span class="nav-text">އެބައުޓް</span>
+        </a>
+
+    </footer>
+
+    <script>
+        let darkMode = false; // Track dark mode state
+
+        function toggleDarkMode() {
+            darkMode = !darkMode;
+            document.body.classList.toggle('dark-mode');
+            const darkModeToggle = document.querySelector('.dark-mode-toggle i');
+            if (darkMode) {
+                darkModeToggle.classList.remove('fa-moon');
+                darkModeToggle.classList.add('fa-sun');
+            } else {
+                darkModeToggle.classList.remove('fa-sun');
+                darkModeToggle.classList.add('fa-moon');
+            }
+        }
+
+
+        // SEO Meta Tags - Static in HTML is better for initial SEO
+        // Document updates are only needed if content changes dynamically.
+
+        let currentStoryIndex = 0;
+        let activeColor = 'black'; // Default pen color
+        let isErasing = false; // Eraser mode flag
+
+        const stories = [
+            {
+                title: 'ބުޅަލުގެ ވާހަކަ',
+                image: 'https://placehold.co/400x300',
+                pages: [
+                    { image: 'https://placehold.co/200x150', text: 'މި ވާހަކައަކީ ވަރަށް ރީތި ބުޅަލެއްގެ ވާހަކައެވެ.' },
+                    { image: 'https://placehold.co/200x150', text: 'އެއްދުވަހު އެ ބުޅާ ކުޅިވަޅު ކުޅެން ދިޔައެވެ.' },
+                    { image: 'https://placehold.co/200x150', text: 'އެއަށްފަހު އެ ބުޅާ ގެއަށް އައެވެ.' }
+                ]
+            },
+            {
+                title: 'ކުއްތާގެ ވާހަކަ',
+                image: 'https://placehold.co/400x300',
+                pages: [
+                    { image: 'https://placehold.co/200x150', text: 'މި ވާހަކައަކީ ވަރަށް ހެލްތީ ކުއްތާއެއްގެ ވާހަކައެވެ.' },
+                    { image: 'https://placehold.co/200x150', text: 'އެއްދުވަހު އެ ކުއްތާ ކަސްރަތު ކުރަން ދިޔައެވެ.' },
+                     { image: 'https://placehold.co/200x150', text: 'އެއަށްފަހު އެ ކުއްތާ ގެއަށް އައެވެ.' }
+                ]
+            }
+        ];
+
+        function openModal(category) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+
+            modal.classList.add('active');
+
+            switch (category) {
+                case 'home':
+                    modalTitle.textContent = 'މަރުހަބާ!';
+                    modalContent.innerHTML = '<p>މަރުހަބާ ކިޔަމާ އެޕްލިކޭޝަނަށް!</p>'; // Replace with your home content
+                    break;
+                case 'stories':
+                    modalTitle.textContent = 'ވާހަކަ ވަގުތު އެޑްވެންޗަރ';
+                    currentStoryIndex = 0;
+                    displayStory(modalContent, 0);
+                    break;
+                case 'games':
+                    modalTitle.textContent = 'ގޭމްސް';
+                    displayGames(modalContent); // Call displayGames for Games section
+                    break;
+                case 'worksheets':
+                    modalTitle.textContent = 'ވޯރކްޝީޓްސް';
+                    displayWorksheets(modalContent);  // Correct case for worksheets
+                    break;
+
+                case 'coloringbook':
+                    modalTitle.textContent = 'ކުލަ ޖައްސާ ފޮތް';
+                    displayColoringBooks(modalContent); // Correct case for coloringbook
+                    break;
+
+                case 'art':
+                    modalTitle.textContent = 'ޚިޔާލީ އާޓް ސްޓޫޑިއޯ';
+                    displayArtGame(modalContent); // Correct case for art
+                    break;
+                case 'about':
+                    modalTitle.textContent = 'އެޕްލިކޭޝަން އާއި މެދު';
+                    modalContent.innerHTML = '<p>މި އެޕްލިކޭޝަނަކީ ކުދިކުދިންނަށް ދިވެހި އުގަންނައިދިނުމަށް ހަދާފައިވާ އެޕްލިކޭޝަނެކެވެ.</p>'; // Replace with your about content
+                    break;
+                 case 'search':
+                    modalTitle.textContent = 'ހޯދާ';
+                    modalContent.innerHTML = '<p>ހޯދާ ފަންކްޝަނަލިޓީ އަދި ނުހަދާ!</p>'; // Replace with your search content or functionality
+                    break;
+                case 'youtube': // Kept for navbar link functionality
+                    modalTitle.textContent = 'ޔޫޓިއުބް ވީޑިއޯސް';
+                    displayYouTube(modalContent);
+                    break;
+                default:
+                    modalTitle.textContent = 'އުހް!';
+                    modalContent.textContent = 'ކަމެއް ގޯސްވެއްޖެ.';
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+        }
+
+        function displayStory(modalContent, storyIndex) {
+            let currentPageIndex = 0;
+            const story = stories[storyIndex];
+
+            function updateStoryContent() {
+                const page = story.pages[currentPageIndex];
+                modalContent.innerHTML = `
+                    <div class="story-container">
+                        <h2>${story.title}</h2>
+                        <img src="${page.image}" alt="${story.title}" class="story-image">
+                        <p class="story-text">${page.text}</p>
+                        <div class="story-navigation">
+                            <button class="navigation-button" onclick="modalContent.previousPage()" ${currentPageIndex === 0 ? 'disabled' : ''}>ކުރީގެ</button>
+                            <span>ސަފްހާ ${currentPageIndex + 1} / ${story.pages.length}</span>
+                            <button class="navigation-button" onclick="modalContent.nextPage()" ${currentPageIndex === story.pages.length - 1 ? 'disabled' : ''}>ފަހުގެ</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function nextPage() {
+                if (currentPageIndex < story.pages.length - 1) {
+                    currentPageIndex++;
+                    updateStoryContent();
+                }
+            }
+
+            function previousPage() {
+                if (currentPageIndex > 0) {
+                    currentPageIndex--;
+                    updateStoryContent();
+                }
+            }
+
+            updateStoryContent();
+            modalContent.nextPage = nextPage;
+            modalContent.previousPage = previousPage;
+        }
+
+
+        function displayMathGame(modalContent) { /* ... Math Game Function ... */ }
+        function checkMathAnswer(num1, num2, answer) { /* ... Check Math Answer Function ... */ }
+        function displayWordPuzzle(modalContent) { /* ... Word Puzzle Function ... */ }
+        function addLetter(letter) { /* ... Add Letter Function ... */ }
+        function shuffleWord(word) { /* ... Shuffle Word Function ... */ }
+        function checkWordPuzzleAnswer(correctWord) { /* ... Check Word Puzzle Answer Function ... */ }
+        function displayArtGame(modalContent) { /* ... Art Game Function ... */ }
+        function setActiveColor(color, buttonElement) { /* ... Set Active Color Function ... */ }
+        function setEraseMode(buttonElement) { /* ... Set Erase Mode Function ... */ }
+        function initializeCanvas() { /* ... Initialize Canvas Function ... */ }
+        function clearCanvas() { /* ... Clear Canvas Function ... */ }
+        function displayWorksheets(modalContent) { /* ... Display Worksheets Function ... */ }
+        function displayColoringBooks(modalContent) { /* ... Display Coloring Books Function ... */ }
+        function downloadImage(imageSrc, name) { /* ... Download Image Function ... */ }
+        function displayYouTube(modalContent) { /* ... Display YouTube Function ... */ }
+
+
+        function displayGames(modalContent) {
+            modalContent.innerHTML = `
+                <div class="games-container">
+                    <button class="start-button" onclick="displayMemoryMatch()">މެމޮރީ މެޗް</button><br><br>
+                    <button class="start-button" onclick="displayGameWordPuzzle()">ލަފުޒު ޕަޒްލް</button><br><br>
+                    <button class="start-button" onclick="displayColorMatch()">ކުލަ މެޗް</button>
+                </div>
+                <div id="game-content"></div>
+            `;
+        }
+
+        function displayMemoryMatch() {
+            const gameContent = document.getElementById('game-content');
+            gameContent.innerHTML = '<p>Memory Match game will be here soon!</p>'; // Replace with actual Memory Match game UI and logic
+        }
+
+        function displayGameWordPuzzle() {
+            const gameContent = document.getElementById('game-content');
+            gameContent.innerHTML = '<p>Word Puzzle game will be here soon!</p>'; // Replace with actual Word Puzzle game UI and logic
+        }
+
+        function displayColorMatch() {
+            const gameContent = document.getElementById('game-content');
+            gameContent.innerHTML = '<p>Color Match game will be here soon!</p>'; // Replace with actual Color Match game UI and logic
+        }
+
+
+    </script>
+</body>
+</html>
